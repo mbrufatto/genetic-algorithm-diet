@@ -1,5 +1,5 @@
 import openpyxl
-from models import Food
+from app.models.food import Food
 from app import db
 
 def safe_float(value):

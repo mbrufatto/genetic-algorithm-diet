@@ -1,6 +1,7 @@
-from app import db
+from ..database import db
 
 class Food(db.Model):
+    __tablename__ = 'food'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     moisture_percent = db.Column(db.Float, nullable=False, default=0)

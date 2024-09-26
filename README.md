@@ -40,10 +40,10 @@ npm install
 npm run dev
 ```
 
-## Testar a aplicação original
-
-Ainda foi mantida a aplicação original em modo texto. Basta executar:
+## Para gerar uma dieta e retornar um JSON
 
 ```sh
-python3  app_original.py
+python3  main.py
 ```
+
+Acessar a url do flask com o /get-diet.
