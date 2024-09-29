@@ -1,6 +1,6 @@
 import random
 
-from ..models.dieta_command import DietaCommand
+from ..models.diet_command import DietaCommand
 from ..queries.food_queries import get_food_by_category_list
 from sqlalchemy.orm import Session
 
