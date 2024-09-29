@@ -49,7 +49,7 @@ def populate_db(drop_database=True):
                 vitamin_c_mg=safe_float(vitamin_c_mg),
                 category=category
             )
-            print(f"Food: {name}")
+            print(f"\n Food: {name}, Categoria: {category}")
             db.session.add(food)
 
         db.session.commit()
