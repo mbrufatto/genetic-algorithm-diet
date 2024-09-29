@@ -1,0 +1,41 @@
+{
+	"info": {
+		"_postman_id": "76e302a8-7a00-4507-90be-1b65308bdf8f",
+		"name": "Algoritmo Genetico",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1213689"
+	},
+	"item": [
+		{
+			"name": "Dieta Com Filtro",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"porcoes\": 8,\r\n    \"calorias\": 1500,\r\n    \"proteinas\": 100,\r\n    \"lipidios\": 200,\r\n    \"carboidratos\": 100,\r\n    \"fibras\": 40,\r\n    \"categorias\": [\r\n        \"Cereais\",\r\n        \"Verduras\",\r\n        \"Frutas\",\r\n        \"Carnes\",       \r\n        \"Bebidas\",\r\n        \"Ovos\",\r\n        \"Açucarados\",\r\n        \"Miscelâneas\",\r\n        \"Industrializados\",\r\n        \"Preparados\",\r\n        \"Leguminosas\",\r\n        \"Nozes\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/post-diet",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"post-diet"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
