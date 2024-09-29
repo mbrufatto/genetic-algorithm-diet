@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 
-from ..models.dieta_command import DietaCommand
+from ..models.diet_command import DietaCommand
 from ..services.genetic import generate_diet, generate_diet_on_command
 from ..database import get_db
 
