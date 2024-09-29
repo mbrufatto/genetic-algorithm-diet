@@ -39,21 +39,20 @@ function getGeneratedDiet() {
             <th>Categoria</th>
             <th>Calorias (kcal)</th>
             <th>Proteínas (g)</th>
-            <th>Gorduras (g)</th>
+            <th>Lipidios (g)</th>
             <th>Carboidratos (g)</th>
-            <th>Fibras (g)</th>
+            <th>Fibra (g)</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="food in diet" class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50  border-b">
-            <td>{{ food.nome }}</td>
-            <td>{{ food.categoria }}</td>
-            <td>{{ food.calorias }}</td>
-            <td>{{ food.proteinas }}</td>
-            <td>{{ food.gorduras }}</td>
-            <td>{{ food.carboidratos }}</td>
-            <!-- TODO: trocar por 'fibras' -->
-            <td>{{ food.colesterol }}</td>
+            <td>{{ food.name }}</td>
+            <td>{{ food.category }}</td>
+            <td>{{ food.energy_kcal }}</td>
+            <td>{{ food.protein_g }}</td>
+            <td>{{ food.lipids_g }}</td>
+            <td>{{ food.carbohydrate_g }}</td>
+            <td>{{ food.dietary_fiber_g }}</td>
           </tr>
         </tbody>
       </table>

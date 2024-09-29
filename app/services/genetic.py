@@ -8,11 +8,11 @@ MAXIMO_EVOLUCOES = 150
 ELITE_PROPORCAO = 0.1
 MUTACAO_PROPORCAO = 0.05
 
-ALVO_CALORIAS = 1500
-ALVO_PROTEINAS = 60
-ALVO_LIPIDIOS = 30
+ALVO_CALORIAS = 1000
+ALVO_PROTEINAS = 100
+ALVO_LIPIDIOS = 200
 ALVO_FIBRAS = 40
-ALVO_CARBOIDRATOS = 50
+ALVO_CARBOIDRATOS = 100
 MAX_PORCOES = 8
 
 # Função para gerar um indivíduo aleatório
@@ -22,12 +22,11 @@ def gerar_individuo(alimentos):
 
 # Função de fitness (quanto mais próximo do alvo, melhor)
 def calcular_fitness(individuo):
-    # TODO: trocar o 'colesterol' por fibras
-    total_calorias = sum([alimento["energy_kcal"] for alimento in individuo])
-    total_proteinas = sum([alimento["protein_g"] for alimento in individuo])
-    total_lipidios = sum([alimento["lipids_g"] for alimento in individuo])
-    total_fibras = sum([alimento["dietary_fiber_g"] for alimento in individuo])
-    total_carboidratos = sum([alimento["carbohydrate_g"] for alimento in individuo])
+    (total_calorias,
+     total_proteinas,
+     total_lipidios,
+     total_fibras,
+     total_carboidratos) = calcular_macro_nutrientes(individuo)
 
     fitness = (
         abs(ALVO_CALORIAS - total_calorias)
@@ -39,6 +38,14 @@ def calcular_fitness(individuo):
 
     return fitness
 
+def calcular_macro_nutrientes(individuo):
+    total_calorias = sum([alimento["energy_kcal"] for alimento in individuo])
+    total_proteinas = sum([alimento["protein_g"] for alimento in individuo])
+    total_lipidios = sum([alimento["lipids_g"] for alimento in individuo])
+    total_fibras = sum([alimento["dietary_fiber_g"] for alimento in individuo])
+    total_carboidratos = sum([alimento["carbohydrate_g"] for alimento in individuo])
+
+    return total_calorias, total_proteinas, total_lipidios, total_fibras, total_carboidratos
 
 # Função para seleção dos melhores indivíduos (elite)
 def selecionar_elite(populacao):
@@ -46,6 +53,7 @@ def selecionar_elite(populacao):
 
     # Melhor fitness
     print(str(round(calcular_fitness(populacao_ordenada[0]), 1)), end=", ")
+
 
     elite_size = int(TAMANHO_POPULACAO * ELITE_PROPORCAO)
     return populacao_ordenada[:elite_size]
@@ -96,4 +104,22 @@ def generate_diet(db: Session):
 
     # TODO: juntar os mesmos alimentos num único registro e somar seus nutrientes
 
+    mostrar_total_nutrientes(populacao[0])
     return populacao[0]
+
+def mostrar_total_nutrientes(individuo):
+    (total_calorias,
+     total_proteinas,
+     total_lipidios,
+     total_fibras,
+     total_carboidratos) = calcular_macro_nutrientes(individuo)
+
+    print("\n")
+    print("\t\tDieta \t | \t Alvo")
+    print("Calorias: \t", round(total_calorias, 1), "\t | \t ", ALVO_CALORIAS)
+    print("Proteinas: \t", round(total_proteinas, 1), "\t | \t ", ALVO_PROTEINAS)
+    print("Lipidios: \t", round(total_lipidios, 1), "\t | \t ", ALVO_LIPIDIOS)
+    print("Colesterol: \t", round(total_fibras, 1), "\t | \t ", ALVO_FIBRAS)
+    print(
+        "Fibras: \t", round(total_carboidratos, 1), "\t | \t ", ALVO_CARBOIDRATOS
+    )

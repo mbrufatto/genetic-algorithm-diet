@@ -1,0 +1,6 @@
+sqlalchemy
+pygame
+flask
+openpyxl
+flask_cors
+Flask-SQLAlchemy
