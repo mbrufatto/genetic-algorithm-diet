@@ -1,5 +1,7 @@
 import random
-from ..queries.food_queries import get_all_food, get_foods_by_category
+
+from ..models.dieta_command import DietaCommand
+from ..queries.food_queries import get_food_by_category_list
 from sqlalchemy.orm import Session
 
 # Parâmetros configuráveis
@@ -15,10 +17,12 @@ ALVO_FIBRAS = 40
 ALVO_CARBOIDRATOS = 100
 MAX_PORCOES = 8
 
+
 # Função para gerar um indivíduo aleatório
 def gerar_individuo(alimentos):
     # TODO: fazer o algoritmo não selecionar as categorias e alimentos indesejados
     return random.sample(alimentos, MAX_PORCOES)
+
 
 # Função de fitness (quanto mais próximo do alvo, melhor)
 def calcular_fitness(individuo):
@@ -87,9 +91,26 @@ def evoluir_populacao(populacao, alimentos):
     return elites + nova_populacao
 
 
-def generate_diet(db: Session):
-    # Consulta todos os alimentos do banco de dados
-    alimentos = [alimento.to_dict() for alimento in get_all_food(db)]
+def generate_diet_on_command(db: Session, command: DietaCommand):
+    global ALVO_CALORIAS, \
+           MAX_PORCOES, \
+           ALVO_FIBRAS, \
+           ALVO_CARBOIDRATOS, \
+           ALVO_LIPIDIOS, \
+           ALVO_PROTEINAS
+
+    ALVO_CALORIAS = command.calorias
+    MAX_PORCOES = command.porcoes
+    ALVO_FIBRAS = command.fibras
+    ALVO_CARBOIDRATOS = command.carboidratos
+    ALVO_LIPIDIOS = command.lipidios
+    ALVO_PROTEINAS = command.proteinas
+
+    return generate_diet(db, command.categorias)
+
+
+def generate_diet(db: Session, categories=None):
+    alimentos = [alimento.to_dict() for alimento in get_food_by_category_list(db, categories)]
 
     populacao = [gerar_individuo(alimentos) for _ in range(TAMANHO_POPULACAO)]
 
@@ -104,10 +125,11 @@ def generate_diet(db: Session):
 
     # TODO: juntar os mesmos alimentos num único registro e somar seus nutrientes
 
-    mostrar_total_nutrientes(populacao[0])
+    show_nutrients(populacao[0])
     return populacao[0]
 
-def mostrar_total_nutrientes(individuo):
+
+def show_nutrients(individuo):
     (total_calorias,
      total_proteinas,
      total_lipidios,
