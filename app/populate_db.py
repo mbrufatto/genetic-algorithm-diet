@@ -6,9 +6,13 @@ def safe_float(value):
     try:
         return float(value)
     except (ValueError, TypeError):
-        return 0  
+        return 0
 
-def populate_db():
+def populate_db(drop_database=True):
+    if drop_database:
+        Food.query.delete()
+        db.session.commit()
+
     if Food.query.first() is None:
         wb = openpyxl.load_workbook('Alimentos.xlsx', data_only=True)
         sheet = wb.active
@@ -16,7 +20,7 @@ def populate_db():
         for row in sheet.iter_rows(min_row=2, values_only=True):
             name, moisture_percent, energy_kcal, energy_kl, protein_g, lipids_g, cholesterol_mg, carbohydrate_g, dietary_fiber_g, ash_g, calcium_mg, magnesium_mg, manganese_mg, phosphorus_mg, iron_mg, sodium_mg, potassium_mg, copper_mg, zinc_mg, retinol_mcg, re_mcg,  rae_mcg, thiamine_mg, riboflavin_mg, pyridoxine_mg, niacin_mg, vitamin_c_mg, category = row
             food = Food(
-                name = name, 
+                name=name,
                 moisture_percent=safe_float(moisture_percent),
                 energy_kcal=safe_float(energy_kcal),
                 energy_kl=safe_float(energy_kl),
