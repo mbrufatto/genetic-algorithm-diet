@@ -2,7 +2,12 @@ import { reactive } from 'vue';
 
 export const state = reactive({
     meals:  [],
-
+    default_config_parameter: {
+        tamanho_populacao: 1000,
+        maximo_evolucoes: 150,
+        elite_proporcao: 0.1,
+        mutacao_proporcao: 0.05
+    },
     defaultFoodTypes: [
         "Cereais",
         "Verduras",

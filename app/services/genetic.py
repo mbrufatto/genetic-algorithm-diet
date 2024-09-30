@@ -1,14 +1,15 @@
 import random
 
 from ..models.diet_command import DietaCommand
+from ..models.diet_config import DietaConfig
 from ..queries.food_queries import get_food_by_category_list
 from sqlalchemy.orm import Session
 
 # Parâmetros configuráveis
-TAMANHO_POPULACAO = 1000
-MAXIMO_EVOLUCOES = 150
-ELITE_PROPORCAO = 0.1
-MUTACAO_PROPORCAO = 0.05
+TAMANHO_POPULACAO: int = 1000
+MAXIMO_EVOLUCOES: int = 150
+ELITE_PROPORCAO: float = 0.1
+MUTACAO_PROPORCAO: float = 0.05
 
 ALVO_CALORIAS = 1000
 ALVO_PROTEINAS = 100
@@ -91,13 +92,17 @@ def evoluir_populacao(populacao, alimentos):
     return elites + nova_populacao
 
 
-def generate_diet_on_command(db: Session, command: DietaCommand):
+def generate_diet_on_command(db: Session, config: DietaConfig, command: DietaCommand):
     global ALVO_CALORIAS, \
            MAX_PORCOES, \
            ALVO_FIBRAS, \
            ALVO_CARBOIDRATOS, \
            ALVO_LIPIDIOS, \
-           ALVO_PROTEINAS
+           ALVO_PROTEINAS, \
+           TAMANHO_POPULACAO, \
+           MAXIMO_EVOLUCOES, \
+           ELITE_PROPORCAO, \
+           MUTACAO_PROPORCAO
 
     ALVO_CALORIAS = command.calorias
     MAX_PORCOES = command.porcoes
@@ -105,6 +110,11 @@ def generate_diet_on_command(db: Session, command: DietaCommand):
     ALVO_CARBOIDRATOS = command.carboidratos
     ALVO_LIPIDIOS = command.lipidios
     ALVO_PROTEINAS = command.proteinas
+
+    TAMANHO_POPULACAO = config.tamanho_populacao
+    MAXIMO_EVOLUCOES = config.maximo_evolucoes
+    ELITE_PROPORCAO = config.elite_proporcao
+    MUTACAO_PROPORCAO = config.mutacao_proporcao
 
     return generate_diet(db, command.categorias)
 

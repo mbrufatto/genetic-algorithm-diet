@@ -47,3 +47,29 @@ python3  main.py
 ```
 
 Acessar a url do flask com o /get-diet.
+
+## Para gerar uma dieta personalizada
+
+ - Via insomnia utilize a josn abaixo:
+ 
+ ```
+ {
+	"meta": {
+		"porcoes": 5,
+		"calorias": 700,
+		"proteinas": 15,
+		"lipidios": 14,
+		"carboidratos": 75,
+		"fibras=data": 8,
+		"categorias": [
+			"Frutas", "Pescados"
+		]
+	},
+	"config": {
+		"tamanho_populacao": 1000,
+		"maximo_evolucoes": 100,
+		"elite_proporcao": 0.1,
+		"mutacao_proporcao": 0.05
+	}
+}
+ ```

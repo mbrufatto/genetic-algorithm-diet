@@ -6,17 +6,34 @@ import axios from 'axios';
 
 const props = defineProps({
     config: Object,
+    paramsConfig: Object
 });
 
 let diet = ref(null);
 
 function getGeneratedDiet() {
-  // TODO: enviar as propriedades como parâmetros
-  axios.get('http://127.0.0.1:5000/get-diet')
+  // TODO: enviar as propriedades como parâmetros a partir dos inputs
+  let payload = {
+    "meta": {
+        porcoes:5,
+        calorias:700,
+        proteinas:15,
+        lipidios:14,
+        carboidratos:75,
+        fibras:8,
+        categorias:["Cereais", "Frutas", "Pescados"]
+    },
+    "config": props.paramsConfig
+  }
+
+  axios.post("http://127.0.0.1:5000/diet/create", payload)
     .then((response) => {
       this.diet = response.data;
       console.log(this.diet);
     })
+    .catch((error) => {
+      console.error("Erro ao obter a dieta:", error);
+    });
 }
 
 </script>
