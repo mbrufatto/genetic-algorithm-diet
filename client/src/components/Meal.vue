@@ -19,15 +19,17 @@ function getGeneratedDiet() {
 }
 
 function postGeneratedDiet() {
-  axios.post('http://127.0.0.1:5000/post-diet', {
+  var generateDietRequest = {
+    porcoes: props.config.target.servings,
     porcoes: props.config.target.servings,
     calorias: props.config.target.calories,
     proteinas: props.config.target.proteins,
     lipidios: props.config.target.lipids,
     carboidratos: props.config.target.carbohydrates,
     fibras: props.config.target.fibers,
-    categorias: 4 // ?
-  })
+    categorias: props.config.typesSelected // ? 
+  }
+  axios.post('http://127.0.0.1:5000/post-diet', generateDietRequest)
     .then((response) => {
       this.diet = response.data;
     })
@@ -109,7 +111,7 @@ function formatDecimal(value, digits) {
         <!-- Refazer dieta -->
         <div class="p-4">
           <!-- TODO: utilizar 'postGeneratedDiet' -->
-          <button @click="getGeneratedDiet()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-2 py-1 me-1 mb-1 focus:outline-none">
+          <button @click="postGeneratedDiet()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-2 py-1 me-1 mb-1 focus:outline-none">
             Refazer dieta
           </button>
         </div>
@@ -118,7 +120,7 @@ function formatDecimal(value, digits) {
       <!-- Gerar dieta -->
       <div v-else class="flex justify-center">
         <!-- TODO: utilizar 'postGeneratedDiet' -->
-        <button @click="getGeneratedDiet()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-2 py-1 me-1 mb-1 focus:outline-none">
+        <button @click="postGeneratedDiet()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-2 py-1 me-1 mb-1 focus:outline-none">
           Gerar dieta
         </button>
       </div>
