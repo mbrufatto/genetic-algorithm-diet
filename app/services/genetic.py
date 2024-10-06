@@ -5,12 +5,12 @@ from ..queries.food_queries import get_food_by_category_list
 from sqlalchemy.orm import Session
 
 # Parâmetros configuráveis
-TAMANHO_POPULACAO = 1000
+TAMANHO_POPULACAO = 3000
 MAXIMO_EVOLUCOES = 150
 ELITE_PROPORCAO = 0.1
-MUTACAO_PROPORCAO = 0.05
+MUTACAO_PROPORCAO = 0.20
 
-ALVO_CALORIAS = 1000
+ALVO_CALORIAS = 2000
 ALVO_PROTEINAS = 100
 ALVO_LIPIDIOS = 200
 ALVO_FIBRAS = 40
@@ -62,27 +62,31 @@ def selecionar_elite(populacao):
     elite_size = int(TAMANHO_POPULACAO * ELITE_PROPORCAO)
     return populacao_ordenada[:elite_size]
 
+def crossover_um_ponto(pai, mae):
+    ponto_corte = random.randint(1, len(pai) - 1)
+    filho = pai[:ponto_corte] + mae[ponto_corte:]
+    return filho
+
+def mutacao_insercao(individuo, alimentos):
+    idx1 = random.sample(range(len(individuo)), 1)
+    idx2 = random.sample(range(len(alimentos)), 1)
+    individuo.pop(idx1[0])
+    individuo.insert(idx1[0], alimentos[idx2[0]])
+    return individuo
 
 def evoluir_populacao(populacao, alimentos):
-
     elites = selecionar_elite(populacao)
-
     nova_populacao = []
     while len(nova_populacao) < len(populacao) - len(elites):
         # Seleciona dois pais aleatórios da elite
         pai, mae = random.choices(elites, k=2)
 
-        filho = [None] * MAX_PORCOES
+        # Cruzamento
+        filho = crossover_um_ponto(pai, mae)
 
-        for i in range(len(pai)):
-            if random.random() < 0.5:
-                filho[i] = pai[i]
-            else:
-                filho[i] = mae[i]
-
-            # Mutação gerando um filho aleatório
-            if random.random() < MUTACAO_PROPORCAO:
-                filho[i] = random.choice(alimentos)
+        # Mutação
+        if random.random() < MUTACAO_PROPORCAO:
+            filho = mutacao_insercao(filho, alimentos)
 
         # Adiciona filho na população
         nova_populacao.append(filho)
