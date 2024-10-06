@@ -17,8 +17,8 @@ const props = defineProps({
     </div>
     <div class="flex flex-wrap">
       <div v-for="food in state.defaultFoodTypes" class="flex space-x-1 items-center p-2 text-xs">
-        <input type="checkbox" name="" id="" :checked="typesSelected.includes(food)">
-        <label for="">{{ food }}</label>
+        <input type="checkbox" :checked="typesSelected.includes(food.code)">
+        <label for="">{{ food.label }}</label>
       </div>
     </div>
   </div>

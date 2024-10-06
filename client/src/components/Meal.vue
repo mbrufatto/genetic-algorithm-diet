@@ -27,8 +27,10 @@ function postGeneratedDiet() {
     lipidios: props.config.target.lipids,
     carboidratos: props.config.target.carbohydrates,
     fibras: props.config.target.fibers,
-    categorias: props.config.typesSelected // ? 
+    categorias: props.config.typesSelected // ?
   }
+  console.log(props.config.typesSelected);
+
   axios.post('http://127.0.0.1:5000/post-diet', generateDietRequest)
     .then((response) => {
       this.diet = response.data;
