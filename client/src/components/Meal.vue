@@ -10,13 +10,12 @@ const props = defineProps({
 
 let diet = ref(null);
 
-function getGeneratedDiet() {
-  // TODO: enviar as propriedades como parâmetros
-  axios.get('http://127.0.0.1:5000/get-diet')
-    .then((response) => {
-      this.diet = response.data;
-    })
-}
+// function getGeneratedDiet() {
+//   axios.get('http://127.0.0.1:5000/get-diet')
+//     .then((response) => {
+//       this.diet = response.data;
+//     })
+// }
 
 function postGeneratedDiet() {
   var generateDietRequest = {
@@ -27,10 +26,8 @@ function postGeneratedDiet() {
     lipidios: props.config.target.lipids,
     carboidratos: props.config.target.carbohydrates,
     fibras: props.config.target.fibers,
-    categorias: props.config.typesSelected // ?
+    categorias: props.config.target.typesSelected
   }
-  console.log(props.config.typesSelected);
-
   axios.post('http://127.0.0.1:5000/post-diet', generateDietRequest)
     .then((response) => {
       this.diet = response.data;
@@ -56,7 +53,7 @@ function formatDecimal(value, digits) {
 
     <!-- Configurações -->
     <div class="flex flex-col space-y-2 w-full md:w-6/12 my-4">
-        <FoodTypes :types-selected="config.typesSelected"></FoodTypes>
+        <FoodTypes :target="config.target"></FoodTypes>
         <Target :target="config.target"></Target>
     </div>
 
@@ -112,7 +109,6 @@ function formatDecimal(value, digits) {
 
         <!-- Refazer dieta -->
         <div class="p-4">
-          <!-- TODO: utilizar 'postGeneratedDiet' -->
           <button @click="postGeneratedDiet()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-2 py-1 me-1 mb-1 focus:outline-none">
             Refazer dieta
           </button>
@@ -121,7 +117,6 @@ function formatDecimal(value, digits) {
 
       <!-- Gerar dieta -->
       <div v-else class="flex justify-center">
-        <!-- TODO: utilizar 'postGeneratedDiet' -->
         <button @click="postGeneratedDiet()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-2 py-1 me-1 mb-1 focus:outline-none">
           Gerar dieta
         </button>

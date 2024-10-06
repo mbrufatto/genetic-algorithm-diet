@@ -21,16 +21,5 @@ onBeforeMount(() => {
         <Meal v-for="(meal) in state.meals" :config="meal" />
     </div>
 
-    <div>
-      <pre class="text-xs bg-gray-100 my-4 p-2">
-TODO:
-( ) Criar banco de dados com as informações da tabela TACO.
-( ) Ao gerar dieta, enviar as variáveis do front para o back.
-( ) Configurar as variáveis globais no front: TAMANHO_POPULACAO, MAXIMO_EVOLUCOES, ELITE_PROPORCAO, MUTACAO_PROPORCAO
-( ) Criar novas refeições
-( ) Perfil de dieta pré-definidas: 'Emagrecimento', 'Atleta', etc. Talvez até definir dietas por sexo/peso.
-( ) Tornar layout responsivo.
-      </pre>
-    </div>
   </div>
 </template>

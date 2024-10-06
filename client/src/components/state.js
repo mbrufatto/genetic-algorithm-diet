@@ -14,7 +14,7 @@ export const state = reactive({
         { label: "Bebidas", code: "BEBIDAS" },
         { label: "Ovos", code: "OVOS" },
         { label: "Açucarados", code: "ACUCARADOS" },
-        { label: "Miscelaneas", code: "MISCELANEAS" },
+        { label: "Miscelâneas", code: "MISCELANEAS" },
         { label: "Industrializados", code: "INDUSTRIALIZADOS" },
         { label: "Preparados", code: "PREPARADOS" },
         { label: "Leguminosas", code: "LEGUMINOSAS" },
@@ -24,7 +24,6 @@ export const state = reactive({
     defaultMeals: [
         {
             title: "Café da manhã",
-            typesSelected: ["CEREAIS", "FRUTAS", "LEITES", "OVOS", "NOZES"],
             target: {
                 servings: 5,
                 calories: 700,
@@ -32,20 +31,11 @@ export const state = reactive({
                 lipids: 14,
                 carbohydrates: 75,
                 fibers: 8,
+                typesSelected: ["CEREAIS", "FRUTAS", "LEITES", "OVOS", "NOZES"],
             },
         },
         {
             title: "Almoço",
-            typesSelected: [
-                "Verduras",
-                "Gorduras e óleos",
-                "Pescados",
-                "Carnes",
-                "Ovos",
-                "Bebidas",
-                "Preparados",
-                "Leguminosas",
-            ],
             target: {
                 servings: 8,
                 calories: 1000,
@@ -53,18 +43,20 @@ export const state = reactive({
                 lipids: 22,
                 carbohydrates: 90,
                 fibers: 10,
+                typesSelected: [
+                    "VERDURAS",
+                    "GORDURAS_OLEOS",
+                    "PESCADOS",
+                    "CARNES",
+                    "OVOS",
+                    "BEBIDAS",
+                    "PREPARADOS",
+                    "LEGUMINOSAS",
+                ],
             },
         },
         {
             title: "Janta",
-            typesSelected: [
-                "Pescados",
-                "Frutas",
-                "Verduras",
-                "Industrializados",
-                "Preparados",
-                "Miscelâneas",
-            ],
             target: {
                 servings: 4,
                 calories: 300,
@@ -72,6 +64,14 @@ export const state = reactive({
                 lipids: 20,
                 carbohydrates: 100,
                 fibers: 7,
+                typesSelected: [
+                    "PESCADOS",
+                    "FRUTAS",
+                    "VERDURAS",
+                    "INDUSTRIALIZADOS",
+                    "PREPARADOS",
+                    "MISCELANEAS",
+                ],
             },
         },
     ],
