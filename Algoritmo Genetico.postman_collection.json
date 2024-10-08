@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"porcoes\": 8,\r\n    \"calorias\": 1500,\r\n    \"proteinas\": 100,\r\n    \"lipidios\": 200,\r\n    \"carboidratos\": 100,\r\n    \"fibras\": 40,\r\n    \"categorias\": [\r\n        \"Cereais\",\r\n        \"Verduras\",\r\n        \"Frutas\",\r\n        \"Carnes\",       \r\n        \"Bebidas\",\r\n        \"Ovos\",\r\n        \"Açucarados\",\r\n        \"Miscelâneas\",\r\n        \"Industrializados\",\r\n        \"Preparados\",\r\n        \"Leguminosas\",\r\n        \"Nozes\"\r\n    ]\r\n}",
+					"raw": "{\r\n  \"meta\": { \"porcoes\": 8,\r\n    \"calorias\": 1500,\r\n    \"proteinas\": 100,\r\n    \"lipidios\": 200,\r\n    \"carboidratos\": 100,\r\n    \"fibras\": 40,\r\n    \"categorias\": [\r\n        \"Cereais\",\r\n        \"Verduras\",\r\n        \"Frutas\",\r\n        \"Carnes\",       \r\n        \"Bebidas\",\r\n        \"Ovos\",\r\n        \"Açucarados\",\r\n        \"Miscelâneas\",\r\n        \"Industrializados\",\r\n        \"Preparados\",\r\n        \"Leguminosas\",\r\n        \"Nozes\"\r\n    ]\r\n}, \"config\": { \"tamanho_populacao\":1000,\"maximo_evolucoes\":150,\"elite_proporcao\":0.1,\"mutacao_proporcao\":0.05 } \r\n }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,7 +21,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/post-diet",
+					"raw": "http://127.0.0.1:5000/diet/create",
 					"protocol": "http",
 					"host": [
 						"127",

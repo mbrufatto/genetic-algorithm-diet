@@ -6,33 +6,33 @@ import axios from 'axios';
 
 const props = defineProps({
     config: Object,
+    paramsConfig: Object
 });
 
 let diet = ref(null);
 let groupResults = ref(false);
 
-// function getGeneratedDiet() {
-//   axios.get('http://127.0.0.1:5000/get-diet')
-//     .then((response) => {
-//       this.diet = response.data;
-//     })
-// }
-
 function postGeneratedDiet() {
-  var generateDietRequest = {
-    porcoes: props.config.target.servings,
-    porcoes: props.config.target.servings,
-    calorias: props.config.target.calories,
-    proteinas: props.config.target.proteins,
-    lipidios: props.config.target.lipids,
-    carboidratos: props.config.target.carbohydrates,
-    fibras: props.config.target.fibers,
-    categorias: props.config.target.typesSelected
+  let generateDietRequest = {
+    "meta": {
+      porcoes: props.config.target.servings,
+      calorias: props.config.target.calories,
+      proteinas: props.config.target.proteins,
+      lipidios: props.config.target.lipids,
+      carboidratos: props.config.target.carbohydrates,
+      fibras: props.config.target.fibers,
+      categorias: props.config.target.typesSelected
+    },
+    "config": props.paramsConfig
   }
-  axios.post('http://127.0.0.1:5000/post-diet', generateDietRequest)
+
+  axios.post("http://127.0.0.1:5000/diet/create", generateDietRequest)
     .then((response) => {
       this.diet = response.data;
     })
+    .catch((error) => {
+      console.error("Erro ao obter a dieta:", error);
+    });
 }
 
 function formatDecimal(value, digits) {

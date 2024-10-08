@@ -1,14 +1,15 @@
 import random
 
 from ..models.diet_command import DietaCommand
+from ..models.diet_config import DietaConfig
 from ..queries.food_queries import get_food_by_category_list
 from sqlalchemy.orm import Session
 
 # Parâmetros configuráveis
-TAMANHO_POPULACAO = 3000
-MAXIMO_EVOLUCOES = 150
-ELITE_PROPORCAO = 0.1
-MUTACAO_PROPORCAO = 0.20
+TAMANHO_POPULACAO: int = 3000
+MAXIMO_EVOLUCOES: int = 150
+ELITE_PROPORCAO: float = 0.1
+MUTACAO_PROPORCAO: float = 0.05
 
 ALVO_CALORIAS = 2000
 ALVO_PROTEINAS = 100
@@ -95,13 +96,17 @@ def evoluir_populacao(populacao, alimentos):
     return elites + nova_populacao
 
 
-def generate_diet_on_command(db: Session, command: DietaCommand):
+def generate_diet_on_command(db: Session, config: DietaConfig, command: DietaCommand):
     global ALVO_CALORIAS, \
            MAX_PORCOES, \
            ALVO_FIBRAS, \
            ALVO_CARBOIDRATOS, \
            ALVO_LIPIDIOS, \
-           ALVO_PROTEINAS
+           ALVO_PROTEINAS, \
+           TAMANHO_POPULACAO, \
+           MAXIMO_EVOLUCOES, \
+           ELITE_PROPORCAO, \
+           MUTACAO_PROPORCAO
 
     ALVO_CALORIAS = command.calorias
     MAX_PORCOES = command.porcoes
@@ -109,6 +114,11 @@ def generate_diet_on_command(db: Session, command: DietaCommand):
     ALVO_CARBOIDRATOS = command.carboidratos
     ALVO_LIPIDIOS = command.lipidios
     ALVO_PROTEINAS = command.proteinas
+
+    TAMANHO_POPULACAO = config.tamanho_populacao
+    MAXIMO_EVOLUCOES = config.maximo_evolucoes
+    ELITE_PROPORCAO = config.elite_proporcao
+    MUTACAO_PROPORCAO = config.mutacao_proporcao
 
     return generate_diet(db, command.categorias)
 
@@ -140,12 +150,19 @@ def show_nutrients(individuo):
      total_fibras,
      total_carboidratos) = calcular_macro_nutrientes(individuo)
 
-    print("\n")
+    print("\n\n Configuração:\n ")
+    print("Tamanho da população: \t", TAMANHO_POPULACAO)
+    print("Máximo de evoluções: \t", MAXIMO_EVOLUCOES)
+    print("Elite proporção: \t", ELITE_PROPORCAO)
+    print("Mutação proporção: \t", MUTACAO_PROPORCAO)
+    
+    print("\n Detalhes da Dieta:\n ")
+
     print("\t\tDieta \t | \t Alvo")
     print("Calorias: \t", round(total_calorias, 1), "\t | \t ", ALVO_CALORIAS)
     print("Proteinas: \t", round(total_proteinas, 1), "\t | \t ", ALVO_PROTEINAS)
     print("Lipidios: \t", round(total_lipidios, 1), "\t | \t ", ALVO_LIPIDIOS)
-    print("Colesterol: \t", round(total_fibras, 1), "\t | \t ", ALVO_FIBRAS)
+    print("Fibras: \t", round(total_fibras, 1), "\t | \t ", ALVO_FIBRAS)
     print(
-        "Fibras: \t", round(total_carboidratos, 1), "\t | \t ", ALVO_CARBOIDRATOS
+        "Carboidratos: \t", round(total_carboidratos, 1), "\t | \t ", ALVO_CARBOIDRATOS
     )

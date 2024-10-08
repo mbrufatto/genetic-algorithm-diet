@@ -5,7 +5,7 @@ class DietaCommand:
                  proteinas: int = 200,
                  lipidios: int = 20,
                  carboidratos: int = 200,
-                 fibras: int = 200 ,
+                 fibras: int = 200,
                  categorias=None):
         if categorias is None:
             categorias = [
