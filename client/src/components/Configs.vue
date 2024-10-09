@@ -39,53 +39,49 @@ watch([tamanhoPopulacao, maximoEvolucoes, eliteProporcao, mutacaoProporcao], () 
   <div class="flex items-center p-2 border rounded border-gray-300 text-gray-800">
     <h2 class="text-lg font-semibold mb-4 min-w-[255px]">Configurações</h2>
 
-    <div class="flex flex-col space-y-2">
-    </div>
+    <div class="flex space-x-2">
 
-    <div class="flex flex-col space-y-2">
-    </div>
-
-    <div class="flex flex-col relative overflow-x-auto w-1/3 min-w-[750px] items-center">
-      <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-        <thead class="text-xs text-gray-700 bg-gray-50">
-          <tr>
-            <th>Tamanho População</th>
-            <th>Máximo Evoluções</th>
-            <th>Elite Proporção</th>
-            <th>Mutação Proporção</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-bind:class="config" class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50  border-b">
-            <td><input
+      <div class="flex flex-col">
+        <label for="" class="text-xs">Tamanho População</label>
+        <input
           id="tamanhoPopulacao"
           type="number"
           v-model="tamanhoPopulacao"
-          class="border border-gray-300 rounded p-2"
-        /></td>
-            <td><input
+          class="bg-gray-50 max-w-36 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+        />
+      </div>
+
+      <div class="flex flex-col">
+        <label for="" class="text-xs">Máximo Evoluções</label>
+        <input
           id="maximoEvolucoes"
           type="number"
           v-model="maximoEvolucoes"
-          class="border border-gray-300 rounded p-2"
-        /></td>
-            <td><input
+          class="bg-gray-50 max-w-36 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+        />
+      </div>
+
+      <div class="flex flex-col">
+        <label for="" class="text-xs">Elite Proporção</label>
+        <input
           id="eliteProporcao"
           type="number"
-          step="0.01"
           v-model="eliteProporcao"
-          class="border border-gray-300 rounded p-2"
-        /></td>
-            <td><input
+          class="bg-gray-50 max-w-36 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+        />
+      </div>
+
+      <div class="flex flex-col">
+        <label for="" class="text-xs">Mutação Proporção</label>
+        <input
           id="mutacaoProporcao"
           type="number"
-          step="0.01"
           v-model="mutacaoProporcao"
-          class="border border-gray-300 rounded p-2"
-        /></td>
-          </tr>
-        </tbody>
-      </table>
+          class="bg-gray-50 max-w-36 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+        />
+      </div>
+
     </div>
+
   </div>
 </template>

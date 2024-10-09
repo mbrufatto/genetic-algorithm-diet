@@ -24,7 +24,7 @@ const updateConfig = (newConfig) => {
 
     <h1 class="font-semibold text-xl text-emerald-700 p-4">Dieta AG</h1>
 
-    <div class="flex flex-col space-y-2 px-2">
+    <div class="flex flex-col space-y-2 px-2 my-2">
       <Configs :config="config" @update:config="updateConfig" />
     </div>
 
