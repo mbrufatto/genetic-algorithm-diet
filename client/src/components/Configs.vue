@@ -1,7 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { defineEmits } from 'vue';
-import axios from 'axios';
 
 const props = defineProps({
     config: Object,
@@ -36,48 +35,48 @@ watch([tamanhoPopulacao, maximoEvolucoes, eliteProporcao, mutacaoProporcao], () 
 </script>
 
 <template>
-  <div class="flex items-center p-2 border rounded border-gray-300 text-gray-800">
+  <div class="flex items-center p-2 border rounded-lg border-gray-100 text-gray-800 bg-white">
     <h2 class="text-lg font-semibold mb-4 min-w-[255px]">Configurações</h2>
 
     <div class="flex space-x-2">
 
       <div class="flex flex-col">
-        <label for="" class="text-xs">Tamanho População</label>
+        <label for="" class="block mb-1 text-xs font-medium text-gray-900">Tamanho População:</label>
         <input
           id="tamanhoPopulacao"
           type="number"
           v-model="tamanhoPopulacao"
-          class="bg-gray-50 max-w-36 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+          class="bg-white max-w-36 border border-gray-200 text-gray-900 text-sm rounded-lg caret-yellow-500 accent-yellow-400  block w-full p-2"
         />
       </div>
 
       <div class="flex flex-col">
-        <label for="" class="text-xs">Máximo Evoluções</label>
+        <label for="" class="block mb-1 text-xs font-medium text-gray-900">Máximo Evoluções:</label>
         <input
           id="maximoEvolucoes"
           type="number"
           v-model="maximoEvolucoes"
-          class="bg-gray-50 max-w-36 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+          class="bg-white max-w-36 border border-gray-200 text-gray-900 text-sm rounded-lg caret-yellow-500 accent-yellow-400 focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2"
         />
       </div>
 
       <div class="flex flex-col">
-        <label for="" class="text-xs">Elite Proporção</label>
+        <label for="" class="block mb-1 text-xs font-medium text-gray-900">Elite Proporção:</label>
         <input
           id="eliteProporcao"
           type="number"
           v-model="eliteProporcao"
-          class="bg-gray-50 max-w-36 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+          class="bg-white max-w-36 border border-gray-200 text-gray-900 text-sm rounded-lg caret-yellow-500 accent-yellow-400 focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2"
         />
       </div>
 
       <div class="flex flex-col">
-        <label for="" class="text-xs">Mutação Proporção</label>
+        <label for="" class="block mb-1 text-xs font-medium text-gray-900">Mutação Proporção:</label>
         <input
           id="mutacaoProporcao"
           type="number"
           v-model="mutacaoProporcao"
-          class="bg-gray-50 max-w-36 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+          class="bg-white max-w-36 border border-gray-200 text-gray-900 text-sm rounded-lg caret-yellow-500 accent-yellow-400 focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2"
         />
       </div>
 

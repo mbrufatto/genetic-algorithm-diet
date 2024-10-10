@@ -26,6 +26,9 @@ function postGeneratedDiet() {
     "config": props.paramsConfig
   }
 
+  console.log(generateDietRequest);
+
+
   axios.post("http://127.0.0.1:5000/diet/create", generateDietRequest)
     .then((response) => {
       this.diet = response.data;
@@ -67,7 +70,7 @@ const groupedDiet = computed(() => {
 </script>
 
 <template>
-  <div class="flex flex-col md:flex-row items-center space-x-2 border rounded border-gray-300 text-gray-800">
+  <div class="flex flex-col md:flex-row items-center space-x-2 border rounded-lg border-gray-100 text-gray-800 bg-white shadow">
 
     <!-- Título -->
     <div class="min-w-32 font-semibold w-full md:w-1/12 text-center">
@@ -86,7 +89,7 @@ const groupedDiet = computed(() => {
       <!-- Tabela Resultado -->
       <div v-if="diet != null" class="flex flex-col relative overflow-x-auto items-center p-2">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 font-mono">
-          <thead class="text-xs text-gray-700 bg-gray-50">
+          <thead class="text-xs text-gray-500 bg-gray-50">
             <tr>
               <th class="text-center" v-if="groupResults">Quant.</th>
               <th class="text-center">Alimento</th>
@@ -99,7 +102,7 @@ const groupedDiet = computed(() => {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="food in (groupResults ? groupedDiet : diet )" class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 border-b">
+            <tr v-for="food in (groupResults ? groupedDiet : diet )" class="odd:bg-white even:bg-gray-50 border-b">
               <td class="text-xs text-center" v-if="groupResults">{{ food.count }}</td>
               <td class="text-xs">{{ food.name }}</td>
               <td class="text-xs">{{ food.category }}</td>
@@ -134,13 +137,13 @@ const groupedDiet = computed(() => {
         </table>
 
         <div class="flex justify-end text-xs space-x-2 w-full">
-          <input type="checkbox" name="" id="" v-model="groupResults">
+          <input type="checkbox" name="" id="" v-model="groupResults" class="accent-yellow-400">
           <span>Agrupar resultados</span>
         </div>
 
         <!-- Refazer dieta -->
         <div class="p-4">
-          <button @click="postGeneratedDiet()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-2 py-1 me-1 mb-1 focus:outline-none">
+          <button @click="postGeneratedDiet()" type="button" class="text-white bg-yellow-500 hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 font-medium rounded text-sm px-2 py-1 me-1 mb-1 focus:outline-none">
             Refazer dieta
           </button>
         </div>
@@ -148,7 +151,7 @@ const groupedDiet = computed(() => {
 
       <!-- Gerar dieta -->
       <div v-else class="flex justify-center">
-        <button @click="postGeneratedDiet()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-2 py-1 me-1 mb-1 focus:outline-none">
+        <button @click="postGeneratedDiet()" type="button" class="text-white bg-yellow-500 hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 font-medium rounded text-sm px-2 py-1 me-1 mb-1 focus:outline-none">
           Gerar dieta
         </button>
       </div>
