@@ -11,6 +11,8 @@ MAXIMO_EVOLUCOES: int = 150
 ELITE_PROPORCAO: float = 0.1
 MUTACAO_PROPORCAO: float = 0.05
 
+FITNESS_OBJETIVO = 30
+
 ALVO_CALORIAS = 2000
 ALVO_PROTEINAS = 100
 ALVO_LIPIDIOS = 200
@@ -57,8 +59,7 @@ def selecionar_elite(populacao):
     populacao_ordenada = sorted(populacao, key=lambda x: calcular_fitness(x))
 
     # Melhor fitness
-    print(str(round(calcular_fitness(populacao_ordenada[0]), 1)), end=", ")
-
+    calcular_fitness(populacao_ordenada[0])
 
     elite_size = int(TAMANHO_POPULACAO * ELITE_PROPORCAO)
     return populacao_ordenada[:elite_size]
@@ -79,6 +80,7 @@ def evoluir_populacao(populacao, alimentos):
     elites = selecionar_elite(populacao)
     nova_populacao = []
     while len(nova_populacao) < len(populacao) - len(elites):
+
         # Seleciona dois pais aleatórios da elite
         pai, mae = random.choices(elites, k=2)
 
@@ -132,12 +134,17 @@ def generate_diet(db: Session, categories=None):
     geracao = 0
 
     while executando and geracao < MAXIMO_EVOLUCOES:
-
         populacao = evoluir_populacao(populacao, alimentos)
+        melhor_fitness = calcular_fitness(populacao[0])
+
+        if melhor_fitness <= FITNESS_OBJETIVO:
+            break
 
         geracao += 1
 
     # TODO: juntar os mesmos alimentos num único registro e somar seus nutrientes
+
+    print(f"Fitness objetivo alcançado na geração {geracao}")
 
     show_nutrients(populacao[0])
     return populacao[0]
@@ -155,7 +162,7 @@ def show_nutrients(individuo):
     print("Máximo de evoluções: \t", MAXIMO_EVOLUCOES)
     print("Elite proporção: \t", ELITE_PROPORCAO)
     print("Mutação proporção: \t", MUTACAO_PROPORCAO)
-    
+
     print("\n Detalhes da Dieta:\n ")
 
     print("\t\tDieta \t | \t Alvo")

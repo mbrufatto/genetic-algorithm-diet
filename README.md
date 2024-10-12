@@ -19,7 +19,7 @@ source env/bin/activate
 pip install Flask
 
 # Instalar o Flask-Cors
-pip install -U flask-cors
+pip install -U flask-cors sqlalchemy pygame flask openpyxl flask_cors Flask-SQLAlchemy 
 
 # Rodar o servidor
 flask run
